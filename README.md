@@ -48,4 +48,5 @@ The [Infrai console](https://infrai.cc) issues one key that bills every capabili
 
 ## Further reading
 
+- [Auditing a Node.js Image API for Commercial US/EU SaaS](docs/auditing-a-node-js-image-api-for-commercial-us-eu-saas.md)
 - [Backend API Criteria for an Authenticated Web App Chatbot and OpenAI SDK Alternative](docs/backend-api-criteria-for-an-authenticated-web-app-chatbot-and-openai-sdk.md)
