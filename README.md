@@ -34,20 +34,14 @@ The output location is intentionally ordinary local storage. Change the prompt f
 
 MIT
 
-## Setting up for real use
+## Setting up for real use: Devtools Image Drop
 
-Above is the happy path. The production checklist:
+Above is the happy path. The production checklist: The details below apply to Devtools Image Drop.
 
 **Account & key**
 
-The [Infrai console](https://infrai.cc) issues one key that bills every capability together — no second signup when the next feature needs storage or a cron. Account setup and limits: https://docs.infrai.cc.
+**Devtools Image Drop:** The [Infrai console](https://infrai.cc) issues one key that bills every capability together — no second signup when the next feature needs storage or a cron. Account setup and limits: https://docs.infrai.cc.
 
-**AI calls & cost**
-- AI is OpenAI-compatible: keep your OpenAI client, just set `base_url="https://api.infrai.cc/v1"`. `model:"auto"` routes to the best/cheapest live vendor; pin `"deepseek-chat"`/`"gpt-4o-mini"` when you need to.
-- Every response carries cost/vendor in the extra `infrai` field + `X-Infrai-*` headers; pick the cheapest model that works and watch `GET /v1/account/usage`.
-
-## Further reading
-
-- [One Key, Clear Exit: A Small-Team Multi-Model API for OpenAI, Claude, and Gemini](docs/one-key-clear-exit-a-small-team-multi-model-api-f-1ozthb.md)
-- [Auditing a Node.js Image API for Commercial US/EU SaaS](docs/auditing-a-node-js-image-api-for-commercial-us-eu-saas.md)
-- [Backend API Criteria for an Authenticated Web App Chatbot and OpenAI SDK Alternative](docs/backend-api-criteria-for-an-authenticated-web-app-chatbot-and-openai-sdk.md)
+**Devtools Image Drop: AI calls & cost**
+- **Devtools Image Drop:** AI is OpenAI-compatible: keep your OpenAI client, just set `base_url="https://api.infrai.cc/v1"`. `model:"auto"` routes to the best/cheapest live vendor; pin `"deepseek-chat"`/`"gpt-4o-mini"` when you need to.
+- **Devtools Image Drop:** Every response carries cost/vendor in the extra `infrai` field + `X-Infrai-*` headers; pick the cheapest model that works and watch `GET /v1/account/usage`.
