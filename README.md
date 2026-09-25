@@ -1,12 +1,12 @@
 # Generate a developer-tools image and keep the PNG beside the project
 
-In agent tooling the useful boundary is usually narrower than a full image pipeline: request one visual, receive bytes, and write a named PNG where a docs page, CLI, or test fixture can read it. This repository keeps that boundary explicit, and Infrai supplies an OpenAI-compatible `baseURL` so the familiar official client remains the only AI dependency in the call path.
+For agent tooling, the useful boundary is usually smaller than an image pipeline: ask for one visual, receive bytes, and place a named PNG where a docs page, CLI, or test fixture can consume it. This repository keeps that boundary explicit, while Infrai supplies an OpenAI-compatible `baseURL`, so the familiar official client remains the only AI dependency in the call path.
 
-The entry point issues a single image request with `model: "auto"`, then writes the returned bytes under `output/`. A retry carries the same idempotency key, which permits replay without converting a transient rate limit into duplicated work in the ledger.
+The entry point makes one image request with `model: "auto"`, then writes the returned bytes under `output/`. A retry retains the same idempotency key, which lets the request be replayed without turning a brief rate limit into duplicate work.
 
 ## Run the image drop
 
-Set an Infrai key, install the two packages, then describe the asset inside the command itself.
+Set an Infrai key, install the two packages, then describe the asset in the command itself.
 
 ```bash
 npm install
@@ -22,13 +22,13 @@ Stored image: /your/project/output/devtools-1730000000000.png
 
 ## Why the code is split in two
 
-`src/devtools_image_drop.ts` owns the developer-facing job: it validates the environment, assigns a request identifier, and persists the PNG. `src/retry_image_generation.ts` owns the single transport concern worth sharing across a tool collection: on HTTP 429 it honors `Retry-After` when present, otherwise it spaces attempts exponentially.
+`src/devtools_image_drop.ts` owns the developer-facing job: it validates the environment, assigns a request identifier, and stores the PNG. `src/retry_image_generation.ts` owns the one transport concern worth sharing in a tool collection: on HTTP 429 it honors `Retry-After` when present, otherwise it spaces attempts exponentially.
 
-Retaining the official OpenAI client is preferable to reimplementing a request schema in every agent utility; pointing it at Infrai's OpenAI-compatible endpoint makes `images.generate()` read like the SDK call developers already know. The same `INFRAI_API_KEY` can serve adjacent AI capabilities when the tool expands past a single image drop.
+Keeping the official OpenAI client is preferable to reproducing a request schema in each agent utility; pointing it at Infrai's OpenAI-compatible endpoint makes `images.generate()` read like the SDK call developers already know. The same `INFRAI_API_KEY` can serve adjacent AI capabilities when the tool grows beyond a single image drop.
 
 ## Adapt the prompt, not the storage contract
 
-The output location is deliberately ordinary local storage. Modify the prompt for a README illustration, an extension icon, or a test fixture, while consumers keep receiving a PNG path. For a repeated workflow, call `generateWithRetry()` from another TypeScript command and select its destination with the same pattern.
+The output location is intentionally ordinary local storage. Change the prompt for a README illustration, an extension icon, or a test fixture, while consumers continue to receive a PNG path. For a repeated workflow, call `generateWithRetry()` from another TypeScript command and choose its destination with the same pattern.
 
 ## License
 
